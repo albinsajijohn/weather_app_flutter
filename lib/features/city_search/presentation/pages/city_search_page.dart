@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../domain/usecases/search_cities_usecase.dart';
-import '../../data/repositories/city_repository_impl.dart';
-import '../../data/datasources/city_remote_datasource.dart';
 import '../../../../core/network/network_client.dart';
-
+import '../../data/datasources/city_remote_datasource.dart';
+import '../../data/repositories/city_repository_impl.dart';
+import '../../domain/usecases/search_cities_usecase.dart';
 import '../bloc/city_search_bloc.dart';
 import '../bloc/city_search_event.dart';
 import '../bloc/city_search_state.dart';
@@ -18,11 +17,7 @@ class CitySearchPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => CitySearchBloc(
         SearchCitiesUseCase(
-          CityRepositoryImpl(
-            CityRemoteDataSource(
-              NetworkClient(),
-            ),
-          ),
+          CityRepositoryImpl(CityRemoteDataSource(NetworkClient())),
         ),
       ),
       child: const CitySearchView(),
@@ -43,14 +38,11 @@ class _CitySearchViewState extends State<CitySearchView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('City Search'),
-      ),
+      appBar: AppBar(title: const Text('City Search')),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            /// 🔍 Search field
             TextField(
               controller: _controller,
               decoration: const InputDecoration(
@@ -58,22 +50,17 @@ class _CitySearchViewState extends State<CitySearchView> {
                 border: OutlineInputBorder(),
               ),
               onChanged: (value) {
-                context.read<CitySearchBloc>().add(
-                      SearchCityEvent(value),
-                    );
+                context.read<CitySearchBloc>().add(SearchCityEvent(value));
               },
             ),
 
             const SizedBox(height: 16),
 
-            /// 🧠 Bloc Builder
             Expanded(
               child: BlocBuilder<CitySearchBloc, CitySearchState>(
                 builder: (context, state) {
                   if (state is CitySearchLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return const Center(child: CircularProgressIndicator());
                   }
 
                   if (state is CitySearchLoaded) {
@@ -83,16 +70,14 @@ class _CitySearchViewState extends State<CitySearchView> {
                         final city = state.cities[index];
                         return ListTile(
                           title: Text(city.name),
-                          subtitle: Text(city.admin1),
+                          subtitle: Text(city.admin2 ?? city.admin1),
                         );
                       },
                     );
                   }
 
                   if (state is CitySearchError) {
-                    return Center(
-                      child: Text(state.message),
-                    );
+                    return Center(child: Text(state.message));
                   }
 
                   return const Center(

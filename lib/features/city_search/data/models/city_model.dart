@@ -1,4 +1,5 @@
 import '../../domain/entities/city_entity.dart';
+import '../constants/city_api_constants.dart';
 
 class CityModel extends CityEntity {
   const CityModel({
@@ -13,13 +14,13 @@ class CityModel extends CityEntity {
 
   factory CityModel.fromJson(Map<String, dynamic> json) {
     return CityModel(
-      id: json['id'] ?? 0,
-      name: json['name'] ?? '',
-      latitude: (json['latitude'] ?? 0).toDouble(),
-      longitude: (json['longitude'] ?? 0).toDouble(),
-      country: json['country'] ?? '',
-      admin1: json['admin1'] ?? '',
-      admin2: json['admin2'],
+      id: json[CityApiConstants.id] ?? 0,
+      name: json[CityApiConstants.name] ?? '',
+      latitude: (json[CityApiConstants.latitude] ?? 0).toDouble(),
+      longitude: (json[CityApiConstants.longitude] ?? 0).toDouble(),
+      country: json[CityApiConstants.country] ?? '',
+      admin1: json[CityApiConstants.admin1] ?? '',
+      admin2: json[CityApiConstants.admin2],
     );
   }
 }

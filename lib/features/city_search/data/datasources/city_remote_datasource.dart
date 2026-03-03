@@ -1,4 +1,6 @@
+import '../../../../core/constants/api_constants.dart';
 import '../../../../core/network/network_client.dart';
+import '../constants/city_api_constants.dart';
 import '../models/city_model.dart';
 
 class CityRemoteDataSource {
@@ -8,16 +10,15 @@ class CityRemoteDataSource {
 
   Future<List<CityModel>> searchCities(String cityName) async {
     final response = await _networkClient.get(
-      '/search',
+      ApiConstants.geoSearch,
       queryParameters: {
-        'name': cityName,
-        'count': 10,
+        CityApiConstants.queryName: cityName,
+        CityApiConstants.count: 10,
       },
     );
 
-    final results = response.data['results'];
+    final results = response.data[CityApiConstants.results];
 
-    // 🛡️ null & type safety
     if (results == null || results is! List) {
       return [];
     }
