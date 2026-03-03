@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart';
 
 class NetworkClient {
-  late final Dio _dio;
-
   NetworkClient() {
     _dio = Dio(
       BaseOptions(
@@ -12,6 +10,7 @@ class NetworkClient {
       ),
     );
   }
+  late final Dio _dio;
 
   // ==================== GET ====================
 
@@ -20,10 +19,7 @@ class NetworkClient {
     Map<String, dynamic>? queryParameters,
   }) async {
     try {
-      final response = await _dio.get(
-        path,
-        queryParameters: queryParameters,
-      );
+      final response = await _dio.get(path, queryParameters: queryParameters);
       return response;
     } on DioException catch (e) {
       throw Exception(e.message);
