@@ -3,9 +3,8 @@ import '../../domain/repositories/city_repository.dart';
 import '../datasources/city_remote_datasource.dart';
 
 class CityRepositoryImpl implements CityRepository {
-  final CityRemoteDataSource _remoteDataSource;
-
   CityRepositoryImpl(this._remoteDataSource);
+  final CityRemoteDataSource _remoteDataSource;
 
   @override
   Future<List<CityEntity>> searchCities(String cityName) async {

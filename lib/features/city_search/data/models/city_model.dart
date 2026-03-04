@@ -1,5 +1,5 @@
 import '../../domain/entities/city_entity.dart';
-import '../constants/city_api_constants.dart';
+import '../../../../core/constants/city_api_constants.dart';
 
 class CityModel extends CityEntity {
   const CityModel({

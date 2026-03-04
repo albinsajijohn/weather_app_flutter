@@ -1,6 +1,6 @@
 import '../../../../core/constants/api_constants.dart';
 import '../../../../core/network/network_client.dart';
-import '../constants/city_api_constants.dart';
+import '../../../../core/constants/city_api_constants.dart';
 import '../models/city_model.dart';
 
 class CityRemoteDataSource {
