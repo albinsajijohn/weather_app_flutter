@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/constants/api_constants.dart';
 import '../../../../core/network/network_client.dart';
 import '../../data/datasources/city_remote_datasource.dart';
 import '../../data/repositories/city_repository_impl.dart';
@@ -17,7 +18,7 @@ class CitySearchPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => CitySearchBloc(
         SearchCitiesUseCase(
-          CityRepositoryImpl(CityRemoteDataSource(NetworkClient())),
+          CityRepositoryImpl(CityRemoteDataSource(NetworkClient(ApiConstants.geoBaseUrl))),
         ),
       ),
       child: CitySearchView(),

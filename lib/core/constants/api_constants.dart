@@ -1,10 +1,12 @@
 class ApiConstants {
  
-  static const String geoBaseUrl =
-      'https://geocoding-api.open-meteo.com/v1';
+ static const String geoBaseUrl =
+      "https://geocoding-api.open-meteo.com/v1";
 
   static const String weatherBaseUrl =
-      'https://api.open-meteo.com/v1';
+      "https://api.open-meteo.com/v1";
+
+
 
  
   static const String geoSearch = '/search';
