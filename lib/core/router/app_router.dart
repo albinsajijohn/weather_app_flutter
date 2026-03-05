@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 
 import '../../features/city_search/presentation/pages/city_search_page.dart';
 import '../../features/current_weather/presentation/pages/current_weather_page.dart';

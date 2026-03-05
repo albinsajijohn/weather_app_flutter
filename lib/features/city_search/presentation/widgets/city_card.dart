@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_gradients.dart';
+import '../../../../core/router/app_router.dart';
 import '../../domain/entities/city_entity.dart';
 
 class CityCard extends StatelessWidget {
@@ -59,6 +61,15 @@ class CityCard extends StatelessWidget {
           color: Colors.white54,
           size: 16,
         ),
+        onTap: () {
+  context.router.push(
+    CurrentWeatherRoute(
+      latitude: city.latitude,
+      longitude: city.longitude,
+      cityName: city.name,
+    ),
+  );
+},
       ),
     );
   }

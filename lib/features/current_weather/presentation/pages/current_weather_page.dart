@@ -1,23 +1,28 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:weather_app_flutter/core/router/app_router.dart';
 
 @RoutePage()
 class CurrentWeatherPage extends StatelessWidget {
-  const CurrentWeatherPage({super.key});
+  final double latitude;
+  final double longitude;
+  final String cityName;
+
+  const CurrentWeatherPage({
+    super.key,
+    required this.latitude,
+    required this.longitude,
+    required this.cityName,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Current Weather'),
+        title: Text(cityName),
       ),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            context.router.push(const ForecastRoute());
-          },
-          child: const Text('View 7-Day Forecast'),
+        child: Text(
+          'Latitude: $latitude\nLongitude: $longitude',
         ),
       ),
     );
