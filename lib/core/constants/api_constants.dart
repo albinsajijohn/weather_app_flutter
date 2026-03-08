@@ -10,7 +10,7 @@ class ApiConstants {
 
  
   static const String geoSearch = '/search';
-  static const String forecast = '/forecast';
+
 
 
   static const int connectTimeoutSeconds = 30;

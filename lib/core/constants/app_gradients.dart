@@ -4,7 +4,8 @@ class AppGradients {
   // AppBar Gradient
   static const LinearGradient appBarGradient = LinearGradient(
     colors: [
-      Color(0xFF3A1C71),
+      // Color(0xFF3A1C71),
+      Color(0xFF00C9FF),
       Color(0xFF00C9FF),
     ],
     begin: Alignment.topLeft,
@@ -14,9 +15,11 @@ class AppGradients {
   // Scaffold Background Gradient
   static const LinearGradient scaffoldGradient = LinearGradient(
     colors: [
-      Color(0xFF0F2027),
-      Color(0xFF3A1C71),
       Color(0xFF00C9FF),
+      
+      Color(0xFF3A1C71),
+      Color(0xFF0F2027),
+      
     ],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,

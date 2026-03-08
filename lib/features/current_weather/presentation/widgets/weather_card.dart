@@ -62,6 +62,7 @@ class WeatherCard extends StatelessWidget {
                 "${weather.windspeed.toStringAsFixed(1)} km/h",
                 style: const TextStyle(color: Colors.white70),
               ),
+              
             ],
           ),
         ],

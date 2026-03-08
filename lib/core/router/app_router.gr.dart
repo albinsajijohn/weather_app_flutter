@@ -30,18 +30,18 @@ class CitySearchRoute extends PageRouteInfo<void> {
 /// [CurrentWeatherPage]
 class CurrentWeatherRoute extends PageRouteInfo<CurrentWeatherRouteArgs> {
   CurrentWeatherRoute({
-    Key? key,
+    required String cityName,
     required double latitude,
     required double longitude,
-    required String cityName,
+    Key? key,
     List<PageRouteInfo>? children,
   }) : super(
          CurrentWeatherRoute.name,
          args: CurrentWeatherRouteArgs(
-           key: key,
+           cityName: cityName,
            latitude: latitude,
            longitude: longitude,
-           cityName: cityName,
+           key: key,
          ),
          initialChildren: children,
        );
@@ -53,10 +53,10 @@ class CurrentWeatherRoute extends PageRouteInfo<CurrentWeatherRouteArgs> {
     builder: (data) {
       final args = data.argsAs<CurrentWeatherRouteArgs>();
       return CurrentWeatherPage(
-        key: args.key,
+        cityName: args.cityName,
         latitude: args.latitude,
         longitude: args.longitude,
-        cityName: args.cityName,
+        key: args.key,
       );
     },
   );
@@ -64,52 +64,108 @@ class CurrentWeatherRoute extends PageRouteInfo<CurrentWeatherRouteArgs> {
 
 class CurrentWeatherRouteArgs {
   const CurrentWeatherRouteArgs({
-    this.key,
+    required this.cityName,
     required this.latitude,
     required this.longitude,
-    required this.cityName,
+    this.key,
   });
 
-  final Key? key;
+  final String cityName;
 
   final double latitude;
 
   final double longitude;
 
-  final String cityName;
+  final Key? key;
 
   @override
   String toString() {
-    return 'CurrentWeatherRouteArgs{key: $key, latitude: $latitude, longitude: $longitude, cityName: $cityName}';
+    return 'CurrentWeatherRouteArgs{cityName: $cityName, latitude: $latitude, longitude: $longitude, key: $key}';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! CurrentWeatherRouteArgs) return false;
-    return key == other.key &&
+    return cityName == other.cityName &&
         latitude == other.latitude &&
         longitude == other.longitude &&
-        cityName == other.cityName;
+        key == other.key;
   }
 
   @override
   int get hashCode =>
-      key.hashCode ^ latitude.hashCode ^ longitude.hashCode ^ cityName.hashCode;
+      cityName.hashCode ^ latitude.hashCode ^ longitude.hashCode ^ key.hashCode;
 }
 
 /// generated route for
 /// [ForecastPage]
-class ForecastRoute extends PageRouteInfo<void> {
-  const ForecastRoute({List<PageRouteInfo>? children})
-    : super(ForecastRoute.name, initialChildren: children);
+class ForecastRoute extends PageRouteInfo<ForecastRouteArgs> {
+  ForecastRoute({
+    required String cityName,
+    required double latitude,
+    required double longitude,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         ForecastRoute.name,
+         args: ForecastRouteArgs(
+           cityName: cityName,
+           latitude: latitude,
+           longitude: longitude,
+           key: key,
+         ),
+         initialChildren: children,
+       );
 
   static const String name = 'ForecastRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const ForecastPage();
+      final args = data.argsAs<ForecastRouteArgs>();
+      return ForecastPage(
+        cityName: args.cityName,
+        latitude: args.latitude,
+        longitude: args.longitude,
+        key: args.key,
+      );
     },
   );
+}
+
+class ForecastRouteArgs {
+  const ForecastRouteArgs({
+    required this.cityName,
+    required this.latitude,
+    required this.longitude,
+    this.key,
+  });
+
+  final String cityName;
+
+  final double latitude;
+
+  final double longitude;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'ForecastRouteArgs{cityName: $cityName, latitude: $latitude, longitude: $longitude, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! ForecastRouteArgs) return false;
+    return cityName == other.cityName &&
+        latitude == other.latitude &&
+        longitude == other.longitude &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode =>
+      cityName.hashCode ^ latitude.hashCode ^ longitude.hashCode ^ key.hashCode;
 }

@@ -5,12 +5,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/constants/api_constants.dart';
 import '../../../../core/constants/app_gradients.dart';
 import '../../../../core/network/network_client.dart';
+import '../../../../core/router/app_router.dart';
+
 import '../../data/datasources/weather_remote_datasource.dart';
 import '../../data/repositories/weather_repository_impl.dart';
 import '../../domain/usecases/get_current_weather_usecase.dart';
+
 import '../bloc/weather_bloc.dart';
 import '../bloc/weather_event.dart';
 import '../bloc/weather_state.dart';
+
 import '../widgets/weather_card.dart';
 
 @RoutePage()
@@ -21,6 +25,7 @@ class CurrentWeatherPage extends StatelessWidget {
     required this.longitude,
     super.key,
   });
+
   final String cityName;
   final double latitude;
   final double longitude;
@@ -31,24 +36,48 @@ class CurrentWeatherPage extends StatelessWidget {
       create: (_) => WeatherBloc(
         GetCurrentWeatherUseCase(
           WeatherRepositoryImpl(
-            WeatherRemoteDatasource(NetworkClient(ApiConstants.weatherBaseUrl)),
+            WeatherRemoteDatasource(
+              NetworkClient(ApiConstants.weatherBaseUrl),
+            ),
           ),
         ),
       )..add(FetchWeatherEvent(latitude, longitude)),
-      child: CurrentWeatherView(cityName: cityName),
+      child: CurrentWeatherView(
+        cityName: cityName,
+        onForecastTap: () {
+          context.router.push(
+            ForecastRoute(
+              cityName: cityName,
+              latitude: latitude,
+              longitude: longitude,
+            ),
+          );
+        },
+      ),
     );
   }
 }
 
 class CurrentWeatherView extends StatelessWidget {
-  const CurrentWeatherView({required this.cityName, super.key});
+  const CurrentWeatherView({
+    required this.cityName,
+    required this.onForecastTap,
+    super.key,
+  });
+
   final String cityName;
+
+  /// Callback from page
+  final VoidCallback onForecastTap;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(cityName, style: const TextStyle(color: Colors.white)),
+        title: Text(
+          cityName,
+          style: const TextStyle(color: Colors.white),
+        ),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: AppGradients.appBarGradient,
@@ -62,13 +91,27 @@ class CurrentWeatherView extends StatelessWidget {
         child: BlocBuilder<WeatherBloc, WeatherState>(
           builder: (context, state) {
             if (state is WeatherLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             }
 
             if (state is WeatherLoaded) {
               final weather = state.weather;
 
-              return Center(child: WeatherCard(weather: weather));
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  WeatherCard(weather: weather),
+
+                  const SizedBox(height: 30),
+
+                  ElevatedButton(
+                    onPressed: onForecastTap,
+                    child: const Text("View 7 Day Forecast"),
+                  ),
+                ],
+              );
             }
 
             if (state is WeatherError) {
