@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/constants/app_gradients.dart';
 import '../../../../core/utils/weather_utils.dart';
 import '../../domain/entities/current_weather_entity.dart';
 
@@ -15,9 +16,7 @@ class WeatherCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 24),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        gradient: const LinearGradient(
-          colors: [Color(0xFF3A1C71), Color(0xFF00C9FF)],
-        ),
+        gradient:AppGradients.currentWeatherCardGradient,
         border: Border.all(color: Colors.white.withOpacity(0.2)),
       ),
 

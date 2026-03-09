@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/network/network_client.dart';
 import '../../../../core/constants/api_constants.dart';
+import '../../../../core/network/network_client.dart';
 
 import '../../data/datasources/forecast_remote_datasource.dart';
 import '../../data/repositories/forecast_repository_impl.dart';
@@ -39,10 +39,14 @@ class ForecastPage extends StatelessWidget {
             ),
           ),
         ),
-      )..add(
-          FetchForecastEvent(latitude, longitude),
-        ),
-      child: ForecastView(cityName: cityName),
+      )..add(FetchForecastEvent(latitude, longitude)),
+
+      /// 👇 pass coordinates to view
+      child: ForecastView(
+        cityName: cityName,
+        latitude: latitude,
+        longitude: longitude,
+      ),
     );
   }
 }

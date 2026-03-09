@@ -44,6 +44,8 @@ class CurrentWeatherPage extends StatelessWidget {
       )..add(FetchWeatherEvent(latitude, longitude)),
       child: CurrentWeatherView(
         cityName: cityName,
+        latitude: latitude,
+        longitude: longitude,
         onForecastTap: () {
           context.router.push(
             ForecastRoute(
@@ -61,13 +63,15 @@ class CurrentWeatherPage extends StatelessWidget {
 class CurrentWeatherView extends StatelessWidget {
   const CurrentWeatherView({
     required this.cityName,
+    required this.latitude,
+    required this.longitude,
     required this.onForecastTap,
     super.key,
   });
 
   final String cityName;
-
-  /// Callback from page
+  final double latitude;
+  final double longitude;
   final VoidCallback onForecastTap;
 
   @override
@@ -84,47 +88,86 @@ class CurrentWeatherView extends StatelessWidget {
           ),
         ),
       ),
+
       body: Container(
         decoration: const BoxDecoration(
           gradient: AppGradients.scaffoldGradient,
         ),
-        child: BlocBuilder<WeatherBloc, WeatherState>(
-          builder: (context, state) {
-            if (state is WeatherLoading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
 
-            if (state is WeatherLoaded) {
-              final weather = state.weather;
-
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  WeatherCard(weather: weather),
-
-                  const SizedBox(height: 30),
-
-                  ElevatedButton(
-                    onPressed: onForecastTap,
-                    child: const Text("View 7 Day Forecast"),
-                  ),
-                ],
-              );
-            }
-
-            if (state is WeatherError) {
-              return Center(
-                child: Text(
-                  state.message,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              );
-            }
-
-            return const SizedBox();
+        child: RefreshIndicator(
+          onRefresh: () async {
+            context.read<WeatherBloc>().add(
+              FetchWeatherEvent(latitude, longitude),
+            );
           },
+
+          child: BlocBuilder<WeatherBloc, WeatherState>(
+            builder: (context, state) {
+
+              /// Loading
+              if (state is WeatherLoading) {
+                return ListView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  children: const [
+                    SizedBox(height: 300),
+                    Center(child: CircularProgressIndicator()),
+                  ],
+                );
+              }
+
+              /// Loaded
+             if (state is WeatherLoaded) {
+  final weather = state.weather;
+
+  return LayoutBuilder(
+    builder: (context, constraints) {
+      return SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight: constraints.maxHeight,
+          ),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+
+                WeatherCard(weather: weather),
+
+                const SizedBox(height: 40),
+
+                ElevatedButton(
+                  onPressed: onForecastTap,
+                  child: const Text("View 7 Day Forecast"),
+                ),
+
+              ],
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}
+              /// Error
+              if (state is WeatherError) {
+                return ListView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  children: [
+                    const SizedBox(height: 300),
+                    Center(
+                      child: Text(
+                        state.message,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                );
+              }
+
+              return const SizedBox();
+            },
+          ),
         ),
       ),
     );
