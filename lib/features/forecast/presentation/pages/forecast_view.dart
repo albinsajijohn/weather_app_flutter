@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/constants/app_gradients.dart';
 import '../../../../core/utils/weather_days.dart';
 import '../../../../core/utils/weather_utils.dart';
-
 import '../bloc/forecast_bloc.dart';
 import '../bloc/forecast_event.dart';
 import '../bloc/forecast_state.dart';
@@ -46,13 +45,12 @@ class ForecastView extends StatelessWidget {
         child: RefreshIndicator(
           onRefresh: () async {
             context.read<ForecastBloc>().add(
-                  FetchForecastEvent(latitude, longitude),
-                );
+              FetchForecastEvent(latitude, longitude),
+            );
           },
 
           child: BlocBuilder<ForecastBloc, ForecastState>(
             builder: (context, state) {
-
               /// Loading
               if (state is ForecastLoading) {
                 return ListView(
@@ -86,7 +84,7 @@ class ForecastView extends StatelessWidget {
                         gradient: AppGradients.forecastCardGradient,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.25),
+                            color: Colors.black.withValues(alpha: .25),
                             blurRadius: 10,
                             offset: const Offset(0, 6),
                           ),
@@ -95,7 +93,6 @@ class ForecastView extends StatelessWidget {
 
                       child: Row(
                         children: [
-
                           /// Weather Icon
                           Container(
                             width: 55,
@@ -103,12 +100,10 @@ class ForecastView extends StatelessWidget {
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Colors.white.withOpacity(0.15),
+                              color: Colors.white.withValues(alpha: .15),
                             ),
                             child: Text(
-                              WeatherUtils.getWeatherIcon(
-                                forecast.weatherCode,
-                              ),
+                              WeatherUtils.getWeatherIcon(forecast.weatherCode),
                               style: const TextStyle(fontSize: 28),
                             ),
                           ),
@@ -118,13 +113,10 @@ class ForecastView extends StatelessWidget {
                           /// Day + Description
                           Expanded(
                             child: Column(
-                              crossAxisAlignment:
-                                  CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  WeatherDays.getDayLabel(
-                                    forecast.date,
-                                  ),
+                                  WeatherDays.getDayLabel(forecast.date),
                                   style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
