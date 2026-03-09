@@ -1,5 +1,7 @@
 import 'package:intl/intl.dart';
 
+import '../constants/time_constants.dart';
+
 class WeatherDays {
 
   static String getDayLabel(String date) {
@@ -11,14 +13,14 @@ class WeatherDays {
         parsedDate.difference(DateTime(today.year, today.month, today.day)).inDays;
 
     if (difference == 0) {
-      return "Today";
+      return TimeConstants.kTimeDiffZero;
     }
 
     if (difference == 1) {
-      return "Tomorrow";
+      return TimeConstants.kTimeDiffOne;
     }
 
-    return DateFormat('EEE').format(parsedDate);
+    return DateFormat(TimeConstants.KDateFor).format(parsedDate);
   }
 
 }

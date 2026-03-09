@@ -16,10 +16,10 @@ class CityCard extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: AppGradients.cityCardGradient,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.white.withOpacity(0.15)),
+        border: Border.all(color: Colors.white.withValues(alpha: .15)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.35),
+            color: Colors.black.withValues(alpha: .35),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),

@@ -13,7 +13,7 @@ import '../../domain/usecases/get_forecast_usecase.dart';
 import '../bloc/forecast_bloc.dart';
 import '../bloc/forecast_event.dart';
 
-import 'forecast_view.dart';
+import '../widgets/forecast_view.dart';
 
 @RoutePage()
 class ForecastPage extends StatelessWidget {

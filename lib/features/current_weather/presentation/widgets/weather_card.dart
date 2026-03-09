@@ -17,7 +17,7 @@ class WeatherCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         gradient:AppGradients.currentWeatherCardGradient,
-        border: Border.all(color: Colors.white.withOpacity(0.2)),
+        border: Border.all(color: Colors.white.withValues(alpha: .2)),
       ),
 
       child: Column(

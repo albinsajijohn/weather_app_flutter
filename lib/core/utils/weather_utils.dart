@@ -1,77 +1,67 @@
+import '../constants/weather_constants.dart';
+
 class WeatherUtils {
 
   /// 🌤 Weather Icon
   static String getWeatherIcon(int code) {
     switch (code) {
 
-      /// Clear sky
       case 0:
-        return "☀️";
+        return WeatherConstants.clearSkyIcon;
 
-      /// Mainly clear / Partly cloudy / Overcast
       case 1:
-        return "🌤";
+        return WeatherConstants.mainlyClearIcon;
       case 2:
-        return "⛅";
+        return WeatherConstants.partlyCloudyIcon;
       case 3:
-        return "☁️";
+        return WeatherConstants.overcastIcon;
 
-      /// Fog
       case 45:
       case 48:
-        return "🌫";
+        return WeatherConstants.fogIcon;
 
-      /// Drizzle
       case 51:
       case 53:
       case 55:
-        return "🌦";
+        return WeatherConstants.drizzleIcon;
 
-      /// Freezing drizzle
       case 56:
       case 57:
-        return "🌧";
+        return WeatherConstants.rainIcon;
 
-      /// Rain
       case 61:
       case 63:
       case 65:
-        return "🌧";
+        return WeatherConstants.rainIcon;
 
-      /// Freezing rain
       case 66:
       case 67:
-        return "🌧";
+        return WeatherConstants.rainIcon;
 
-      /// Snow fall
       case 71:
       case 73:
       case 75:
-        return "❄️";
+        return WeatherConstants.snowIcon;
 
-      /// Snow grains
       case 77:
-        return "❄️";
+        return WeatherConstants.snowIcon;
 
-      /// Rain showers
       case 80:
       case 81:
       case 82:
-        return "🌧";
+        return WeatherConstants.rainIcon;
 
-      /// Snow showers
       case 85:
       case 86:
-        return "🌨";
+        return WeatherConstants.snowShowerIcon;
 
-      /// Thunderstorm
       case 95:
       case 96:
       case 99:
-        return "⛈";
+        return WeatherConstants.thunderstormIcon;
 
       default:
-        return "🌍";
+        return WeatherConstants.unknownIcon;
     }
   }
 
@@ -79,90 +69,76 @@ class WeatherUtils {
   static String getWeatherDescription(int code) {
     switch (code) {
 
-      /// Clear sky
       case 0:
-        return "Clear Sky";
+        return WeatherConstants.clearSky;
 
-      /// Mainly clear / Partly cloudy / Overcast
       case 1:
-        return "Mainly Clear";
+        return WeatherConstants.mainlyClear;
       case 2:
-        return "Partly Cloudy";
+        return WeatherConstants.partlyCloudy;
       case 3:
-        return "Overcast";
+        return WeatherConstants.overcast;
 
-      /// Fog
       case 45:
-        return "Fog";
+        return WeatherConstants.fog;
       case 48:
-        return "Depositing Rime Fog";
+        return WeatherConstants.rimeFog;
 
-      /// Drizzle
       case 51:
-        return "Light Drizzle";
+        return WeatherConstants.lightDrizzle;
       case 53:
-        return "Moderate Drizzle";
+        return WeatherConstants.moderateDrizzle;
       case 55:
-        return "Dense Drizzle";
+        return WeatherConstants.denseDrizzle;
 
-      /// Freezing drizzle
       case 56:
-        return "Light Freezing Drizzle";
+        return WeatherConstants.lightFreezingDrizzle;
       case 57:
-        return "Dense Freezing Drizzle";
+        return WeatherConstants.denseFreezingDrizzle;
 
-      /// Rain
       case 61:
-        return "Slight Rain";
+        return WeatherConstants.slightRain;
       case 63:
-        return "Moderate Rain";
+        return WeatherConstants.moderateRain;
       case 65:
-        return "Heavy Rain";
+        return WeatherConstants.heavyRain;
 
-      /// Freezing rain
       case 66:
-        return "Light Freezing Rain";
+        return WeatherConstants.lightFreezingRain;
       case 67:
-        return "Heavy Freezing Rain";
+        return WeatherConstants.heavyFreezingRain;
 
-      /// Snow fall
       case 71:
-        return "Slight Snow Fall";
+        return WeatherConstants.slightSnow;
       case 73:
-        return "Moderate Snow Fall";
+        return WeatherConstants.moderateSnow;
       case 75:
-        return "Heavy Snow Fall";
+        return WeatherConstants.heavySnow;
 
-      /// Snow grains
       case 77:
-        return "Snow Grains";
+        return WeatherConstants.snowGrains;
 
-      /// Rain showers
       case 80:
-        return "Slight Rain Showers";
+        return WeatherConstants.slightRainShowers;
       case 81:
-        return "Moderate Rain Showers";
+        return WeatherConstants.moderateRainShowers;
       case 82:
-        return "Violent Rain Showers";
+        return WeatherConstants.violentRainShowers;
 
-      /// Snow showers
       case 85:
-        return "Slight Snow Showers";
+        return WeatherConstants.slightSnowShowers;
       case 86:
-        return "Heavy Snow Showers";
+        return WeatherConstants.heavySnowShowers;
 
-      /// Thunderstorm
       case 95:
-        return "Thunderstorm";
-
-      /// Thunderstorm with hail
+        return WeatherConstants.thunderstorm;
       case 96:
-        return "Thunderstorm with Slight Hail";
+        return WeatherConstants.thunderstormHail;
       case 99:
-        return "Thunderstorm with Heavy Hail";
+        return WeatherConstants.severeThunderstorm;
 
       default:
-        return "Unknown Weather";
+        return WeatherConstants.unknownWeather;
     }
   }
 }
