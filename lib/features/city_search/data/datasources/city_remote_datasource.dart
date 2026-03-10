@@ -1,12 +1,11 @@
 import '../../../../core/constants/api_constants.dart';
-import '../../../../core/network/network_client.dart';
 import '../../../../core/constants/city_api_constants.dart';
+import '../../../../core/network/network_client.dart';
 import '../models/city_model.dart';
 
 class CityRemoteDataSource {
-  final NetworkClient _networkClient;
-
   CityRemoteDataSource(this._networkClient);
+  final NetworkClient _networkClient;
 
   Future<List<CityModel>> searchCities(String cityName) async {
     final response = await _networkClient.get(
@@ -23,8 +22,6 @@ class CityRemoteDataSource {
       return [];
     }
 
-    return results
-        .map<CityModel>((json) => CityModel.fromJson(json))
-        .toList();
+    return results.map<CityModel>((json) => CityModel.fromJson(json)).toList();
   }
 }

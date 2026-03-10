@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_gradients.dart';
+import '../../../../core/router/app_router.dart';
 import '../../domain/entities/city_entity.dart';
 
 class CityCard extends StatelessWidget {
@@ -14,10 +16,10 @@ class CityCard extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: AppGradients.cityCardGradient,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.white.withOpacity(0.15)),
+        border: Border.all(color: Colors.white.withValues(alpha: .15)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.35),
+            color: Colors.black.withValues(alpha: .35),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -59,6 +61,15 @@ class CityCard extends StatelessWidget {
           color: Colors.white54,
           size: 16,
         ),
+        onTap: () {
+  context.router.push(
+    CurrentWeatherRoute(
+      latitude: city.latitude,
+      longitude: city.longitude,
+      cityName: city.name,
+    ),
+  );
+},
       ),
     );
   }

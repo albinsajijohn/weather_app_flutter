@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,6 +8,7 @@ import '../bloc/city_search_bloc.dart';
 import '../bloc/city_search_event.dart';
 import '../bloc/city_search_state.dart';
 import 'city_card.dart';
+
 
 class CitySearchView extends StatelessWidget {
   CitySearchView({super.key});
@@ -44,10 +46,10 @@ class CitySearchView extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: AppGradients.searchBarGradient,
                   borderRadius: BorderRadius.circular(30),
-                  border: Border.all(color: Colors.white.withOpacity(0.15)),
+                  border: Border.all(color: Colors.white.withValues(alpha: .15)),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.35),
+                      color: Colors.black.withValues(alpha: .35),
                       blurRadius: 10,
                       offset: const Offset(0, 4),
                     ),
