@@ -41,7 +41,7 @@ class ForecastPage extends StatelessWidget {
         ),
       )..add(FetchForecastEvent(latitude, longitude)),
 
-      /// 👇 pass coordinates to view
+     
       child: ForecastView(
         cityName: cityName,
         latitude: latitude,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/constants/api_constants.dart';
-import '../../../../core/constants/app_gradients.dart';
+
 import '../../../../core/network/network_client.dart';
 import '../../../../core/router/app_router.dart';
 
@@ -13,10 +13,10 @@ import '../../domain/usecases/get_current_weather_usecase.dart';
 
 import '../bloc/weather_bloc.dart';
 import '../bloc/weather_event.dart';
-import '../bloc/weather_state.dart';
+
 
 import '../widgets/current_weather_view.dart';
-import '../widgets/weather_card.dart';
+
 
 @RoutePage()
 class CurrentWeatherPage extends StatelessWidget {

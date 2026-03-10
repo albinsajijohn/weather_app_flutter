@@ -16,7 +16,7 @@ class ForecastRemoteDatasource {
         WeatherApiConstants.latitude: latitude,
         WeatherApiConstants.longitude: longitude,
 
-        /// forecast specific parameters
+        
         "daily": "weathercode,temperature_2m_max,temperature_2m_min",
         "timezone": "auto",
       },

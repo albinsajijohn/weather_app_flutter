@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/constants/app_gradients.dart';
@@ -27,10 +26,7 @@ class CurrentWeatherView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          cityName,
-          style: const TextStyle(color: Colors.white),
-        ),
+        title: Text(cityName, style: const TextStyle(color: Colors.white)),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: AppGradients.appBarGradient,
@@ -52,7 +48,6 @@ class CurrentWeatherView extends StatelessWidget {
 
           child: BlocBuilder<WeatherBloc, WeatherState>(
             builder: (context, state) {
-
               /// Loading
               if (state is WeatherLoading) {
                 return ListView(
@@ -65,39 +60,40 @@ class CurrentWeatherView extends StatelessWidget {
               }
 
               /// Loaded
-             if (state is WeatherLoaded) {
-  final weather = state.weather;
+              if (state is WeatherLoaded) {
+                final weather = state.weather;
 
-  return LayoutBuilder(
-    builder: (context, constraints) {
-      return SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: constraints.maxHeight,
-          ),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
+                return LayoutBuilder(
+                  builder: (context, constraints) {
+                    return SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          minHeight: constraints.maxHeight,
+                        ),
+                        child: Center(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              WeatherCard(weather: weather),
 
-                WeatherCard(weather: weather),
+                              const SizedBox(height: 40),
 
-                const SizedBox(height: 40),
+                              ElevatedButton(
+                                onPressed: onForecastTap,
+                                child: const Text(
+                                  CurrentWeatherConstants.kbutton,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }
 
-                ElevatedButton(
-                  onPressed: onForecastTap,
-                  child: const Text(CurrentWeatherConstants.kbutton),
-                ),
-
-              ],
-            ),
-          ),
-        ),
-      );
-    },
-  );
-}
               /// Error
               if (state is WeatherError) {
                 return ListView(

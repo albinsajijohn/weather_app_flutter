@@ -3,9 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/constants/app_gradients.dart';
 import '../../../../core/constants/forecast_constants.dart';
-import '../../../../core/utils/weather_days.dart';
-import '../../../../core/utils/weather_utils.dart';
-import '../../domain/entities/forecast_entity.dart';
+
 import '../bloc/forecast_bloc.dart';
 import '../bloc/forecast_event.dart';
 import '../bloc/forecast_state.dart';
@@ -54,7 +52,7 @@ class ForecastView extends StatelessWidget {
 
           child: BlocBuilder<ForecastBloc, ForecastState>(
             builder: (context, state) {
-              /// Loading
+            
               if (state is ForecastLoading) {
                 return ListView(
                   physics: const AlwaysScrollableScrollPhysics(),
@@ -65,14 +63,14 @@ class ForecastView extends StatelessWidget {
                 );
               }
 
-              /// Loaded
+           
               if (state is ForecastLoaded) {
                 final forecasts = state.forecasts;
 
                 return ForecastCard(forecasts: forecasts);
               }
 
-              /// Error
+           
               if (state is ForecastError) {
                 return ListView(
                   physics: const AlwaysScrollableScrollPhysics(),
